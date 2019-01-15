@@ -25,7 +25,7 @@ def prepareCommand(Map configFile){
 		println "Exception Expected "
 		throw error
 	} catch (Exception ex) {
-		println "FAILURE: runJavaMavenBuild(): ${ex.message}"
+		println "FAILURE: runNpm(): ${ex.message}"
 		throw ex
 	}
 	
