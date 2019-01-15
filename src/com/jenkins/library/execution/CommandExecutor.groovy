@@ -2,7 +2,7 @@ package com.jenkins.library.execution
 
 def execute(String command){
 try{
-	withMaven() {
+	 //withMaven() {
 		switch(getOS()){
 			case "unix" :
 				sh "${command}"
@@ -13,7 +13,7 @@ try{
 			case "macos" :
 				sh "${command}"
 			}
-		}
+		//}
 	} catch(groovy.lang.MissingMethodException err) {
 		if (err.getMessage().contains("com.jenkins.pipeline.execution.ExecuteCommand.sh") || err.getMessage().contains("com.jenkins.pipeline.execution.ExecuteCommand.bat")) {
 			println  "Exception caught because on jenkins dependency on :" + getOS() 
