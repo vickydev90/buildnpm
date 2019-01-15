@@ -33,7 +33,7 @@ def prepareCommand(Map configFile){
 	}
 }
 
-def NpmRun(Map configFile){
+/* def NpmRun(Map configFile){
 	try{
 		// Default build goals are 'clean package'
 		def buildGoals = configFile.node.npmRun_goals ? configFile.node.npmRun_goals.toString() : "release"
@@ -53,4 +53,4 @@ def NpmRun(Map configFile){
 		println "FAILURE: runNpm(): ${ex.message}"
 		throw ex
 	}
-}
+} */
