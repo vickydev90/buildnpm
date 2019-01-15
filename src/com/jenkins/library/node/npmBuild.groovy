@@ -36,7 +36,7 @@ def prepareCommand(Map configFile){
 def NpmRun(Map configFile){
 	try{
 		// Default build goals are 'clean package'
-		def buildGoals = configFile.node.npmRun_goals ? configFile.node.npmRun_goals.toString() : "install"
+		def buildGoals = configFile.node.npmRun_goals ? configFile.node.npmRun_goals.toString() : "release"
 
 		println "Creating Command for execution ...."
 		def command = "npm run"
