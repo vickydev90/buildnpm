@@ -5,7 +5,7 @@ import org.yaml.snakeyaml.Yaml
 
 // Defaults scenario, nothing passed
 def call() {
-	String configPath = "${env.WORKSPACE}/pipelines/conf/java-maven-build.yaml"
+	String configPath = "${env.WORKSPACE}/pipelines/conf/build-nodejs.yaml"
 
 	Map configFile = readYaml file: configPath
 
