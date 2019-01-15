@@ -1,0 +1,83 @@
+apply plugin: 'groovy'
+apply plugin: 'com.bmuschko.clover'
+apply plugin: 'codenarc'
+
+repositories {
+<<<<<<< HEAD
+    maven { url 'https://repo.jenkins-ci.org/public/' }
+=======
+    maven { url 'http://nexus.sandbox.extranet.group/nexus/content/repositories/maven2/' }
+>>>>>>> 3a3457a61fd7ff23e5414874f3084883efdbe019
+}
+
+
+dependencies {
+    clover 'org.openclover:clover:4.2.0'
+    compile 'org.codehaus.groovy:groovy-all:2.4.11'
+    compile 'com.cloudbees:groovy-cps:1.1'
+    compile 'org.yaml:snakeyaml:1.18'
+
+    testCompile 'com.lesfurets:jenkins-pipeline-unit:1.1'
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testCompile 'cglib:cglib-nodep:3.2.2'
+    testCompile 'org.objenesis:objenesis:1.2'
+    
+}
+
+buildscript {
+    repositories {
+<<<<<<< HEAD
+        maven { url 'https://repo.jenkins-ci.org/public/' }
+=======
+        maven { url 'http://nexus.sandbox.extranet.group/nexus/content/repositories/maven2/' }
+>>>>>>> 3a3457a61fd7ff23e5414874f3084883efdbe019
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-clover-plugin:2.2.0'
+    }
+}
+
+clover {
+ report {
+    html = true
+    // Support capturing test results from JUnix XML report
+    testResultsDir = 'build/test-results/test/'
+    }
+}
+
+codenarc {
+    toolVersion = '1.1'
+    configFile = file('config/codenarc/rules.groovy')
+    ignoreFailures = true
+}
+
+codenarcTest {
+    configFile = file('config/codenarc/rules-test.groovy')
+    ignoreFailures = true
+    exclude "support/PipelineTestHelper.groovy"
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src', 'vars']
+        }
+        java {
+            srcDirs = []
+        }
+        resources {
+            srcDirs = []
+        }
+    }
+    test {
+        groovy {
+            srcDirs= ['test']
+        }
+    }
+}
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}

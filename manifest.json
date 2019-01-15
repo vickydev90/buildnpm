@@ -1,0 +1,33 @@
+{
+    "Jenkins": {
+      "Java": {
+        "Build": {
+          "Lib": [
+            {
+<<<<<<< HEAD
+              "Description": "Ability to run build Java projects using Maven",
+=======
+              "Name": "Java Maven Build",
+              "Description": "Build Java projects using Maven build tool.",
+>>>>>>> 3a3457a61fd7ff23e5414874f3084883efdbe019
+              "Platform": "nix",
+              "Command": "runMavenBuild",
+              "Version": "1.0",
+              "Config": "pipelines/conf/java-maven-build.yaml",
+              "Github Repo": "https://github.lbg.eu-gb.bluemix.net/jenkins-shared-library/java-maven-build_nix.git",
+              "Minimum SolutionVersion": "2.12",
+              "Dependencies": "Pipeline-utility-step",
+<<<<<<< HEAD
+              "Library": "java-maven-build@master",
+              "Tags": "Jenkins, SharedLib, Java, Build",
+              "Name": "java-maven-build_nix"
+=======
+              "Library": "java-maven-build_nix@master",
+              "Tags": "Jenkins, SharedLib, Java, Build"
+>>>>>>> 3a3457a61fd7ff23e5414874f3084883efdbe019
+            }
+          ]
+        }
+      }
+    }
+  }

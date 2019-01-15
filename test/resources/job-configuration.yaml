@@ -1,0 +1,21 @@
+---
+<<<<<<< HEAD
+application: fake-app
+=======
+>>>>>>> 3a3457a61fd7ff23e5414874f3084883efdbe019
+maven:
+    build_pom_path: pom.xml
+    build_goals: clean package
+    settings_file: pipelines/conf/settings.xml
+    extra_args:
+<<<<<<< HEAD
+        - '-DskipTests'
+nexus:
+    url: http://nexus2.sandbox.extranet.group/nexus
+    publish:
+        credential_id: my-secret-id
+    snapshot_repo: maven-repo-snapshot
+    release_repo: releases
+=======
+        - '-DskipTests'
+>>>>>>> 3a3457a61fd7ff23e5414874f3084883efdbe019

@@ -1,0 +1,185 @@
+{
+	"application" : {
+		"name" : "mlp-productmgmt-api" ,
+		"domain_suffix" : ".api.lbg.eu-gb.azurestack.net" , 
+		"domain_prefix" : "http://lloyds"
+	},
+	"nexus": {
+		"credentials": "nexus-uploader"
+	},
+	"sonar": {
+		"exclusions": "**/pipelines/**,Jenkinsfile",
+		"coverage_exclusions":  "**/pipelines/**,Jenkinsfile,**/model/**,**/constants/**,**/domain/**,**/domains/**,**/dto/**,**/exception/**,**/util/**,**/ReflectionUtil.java,**/ApplicationInitializer.java,**/ApplicationSource.java,**/SwaggerConfig.java,**/ApiModuleConfig.java,**/configuration/**",
+		"quality_gate": "MLP-API-QG",
+		"server_id": "SONAR-main"
+	},
+	"splunk": {
+		"reportdir": "/apps/splunkreports/mlp-productmgmt-api",
+		"differentdir": "Cant see a structure",
+		"host": "10.113.140.187"
+	},
+	"maven": {
+		"home": "/apps/tools/maven",
+		"pom": "mlp-productmgmt-api/pom.xml",
+		"bdd_pom": "api-automation/pom.xml",
+		"settings": "pipelines/conf/settings.xml",
+		"deploy_goals": "deploy",
+		"build_goals": "-U clean install -DskipTests",
+		"bdd_goals": "-U clean test -Dmaven.test.failure.ignore=true -s pipeline/conf/settings.xml -s pipelines/conf/settings.xml -f api-automation/pom.xml",
+		
+		"coverage_goals": "-U clean test cobertura:cobertura -Dcobertura.report.format=xml",
+		"groupID": "com.lbg.modelmaker"
+	},
+	"zap": {
+		"sonarQuality_gate": "PCA-ZAP-QP",
+		"zap_goals": "cucumber-sauce-firefox-Linux",
+		"resultdir": "zap-report"
+	},
+	"environments": {
+		"dev": {
+			"bluemix": {
+				"org": "POC77_MachineLearning",
+				"env": "MLP-DEV",
+				"api": "api.lbg.eu-gb.bluemix.net",
+				"credentials": "bluemix-global-deployer"
+			},
+			"artifact_info": {
+				"major": "1",
+				"minor": "1",
+				"jar_prefix": "mlp-productmgmt-api"
+			},
+			"tokens": {
+				"dbId":"mlp-dev-db-creds",
+                "DB2_DEFAULT_DATASORUCE":"DefaultDataSource",
+         		"DDL_AUTO":"spring.jpa.hibernate.ddl-auto=create",
+                "DB_JNDI":"jdbc/db2",
+                "DB_JNDI-NAME":"",
+         		"DB_DIALECT":"spring.jpa.hibernate.dialect=org.hibernate.dialect.H2Dialect",
+         		"H2_USERNAME":"spring.datasource.username=sa",
+         		"H2_PASSWORD":"spring.datasource.password=",
+         		"H2_CONSOLE":"spring.h2.console.enabled=true",
+         		"H2_WEB_SETTINGS":"spring.h2.console.settings.web-allow-others=true",
+         		"H2_PLATFORM":"spring.datasource.platform=h2",
+         		"H2_URL":"spring.datasource.url=jdbc:h2:mem:mlpm",
+         		"ADD_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions",
+         		"REMOVE_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions/remove",
+         		"GET_USER_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions",
+         		"RETRIEVE_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions/userPermissions?userId={userId}",
+         		"APP_LOG_DIR": "./log",
+				"LOG_FILE_PREFIX": "MLP-ProductMgmt",
+				"ROOT_LOG_LEVEL": "INFO",
+				"APPLICATION_LOG_LEVEL": "DEBUG",
+				"CONSOLE_LOG_LEVEL": "DEBUG",
+				"FILE_LOG_LEVEL": "ON",
+				"LOG_IMMEDIATE_FLUSH": "true",
+				"MAX_SIZE_IN_MB_PER_LOG_FILE": "5",
+				"MAXIMUM_NUMBER_OF_ROLLED_FILES": "2",
+				"PERMISSION_SERVICE_REQUEST_TIMEOUT_IN_MILLISECONDS": "5000",
+				"PERMISSION_OPEN_CIRCUIT_TIMEOUT_IN_MILLISECONDS": "500",
+				"PERMISSION_MINIMUM_REQUEST_FOR_HEATH_CHECK": "5",
+				"PERMISSION_ERROR_THRESHOLD_PERCENTAGE": "50"
+	      	}
+		},
+		"release": {
+			"bluemix": {
+				"org": "POC77_MachineLearning",
+				"env": "MLP-STAGE",
+				"api": "api.lbg.eu-gb.bluemix.net",
+				"credentials": "bluemix-global-deployer"
+			},
+			"artifact_info": {
+				"major": "1",
+				"minor": "1",
+				"jar_prefix": "mlp-productmgmt-api"
+			},
+			"tokens": {
+				"dbId":"mlp-test-db-creds",
+				"H2_DEFAULT_DATASORUCE":"H2",
+				"DB2_DEFAULT_DATASORUCE":"DefaultDataSource",
+				"DB_DIALECT":"spring.jpa.hibernate.dialect=org.hibernate.dialect.DB2Dialect",
+	        	"DDL_AUTO":"",
+				"DB_JNDI":"jdbc/db2",
+				"DB_JNDI-NAME":"spring.datasource.jndi-name=jdbc/db2",
+	        	"H2_DIALECT":"",
+	        	"H2_USERNAME":"",
+	        	"H2_PASSWORD":"",
+	        	"H2_CONSOLE":"",
+	        	"H2_WEB_SETTINGS":"",
+	        	"H2_PLATFORM":"",
+	        	"H2_URL":"",
+	        	"ADD_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-release-prod.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions",
+	        	"REMOVE_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-release-prod.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions/remove",
+				"RETRIEVE_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-release-prod.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions/userPermissions?userId={userId}",
+				"GET_USER_URL":"https://j2-mlp-useraccessmgmt-api-release-prod.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions",
+	      		"APP_LOG_DIR": "./log",
+				"LOG_FILE_PREFIX": "MLP-ProductMgmt",
+				"ROOT_LOG_LEVEL": "DEBUG",
+				"APPLICATION_LOG_LEVEL": "DEBUG",
+				"CONSOLE_LOG_LEVEL": "DEBUG",
+				"FILE_LOG_LEVEL": "ON",
+				"LOG_IMMEDIATE_FLUSH": "true",
+				"MAX_SIZE_IN_MB_PER_LOG_FILE": "5",
+				"MAXIMUM_NUMBER_OF_ROLLED_FILES": "2",
+				"PERMISSION_SERVICE_REQUEST_TIMEOUT_IN_MILLISECONDS": "5000",
+				"PERMISSION_OPEN_CIRCUIT_TIMEOUT_IN_MILLISECONDS": "500",
+				"PERMISSION_MINIMUM_REQUEST_FOR_HEATH_CHECK": "5",
+				"PERMISSION_ERROR_THRESHOLD_PERCENTAGE": "50"
+	      	}
+		},
+		"master": {
+			"bluemix": {
+				"org": "POC77_MachineLearning",
+				"env": "MLP-DEV",
+				"api": "api.lbg.eu-gb.bluemix.net",
+				"credentials": "bluemix-global-deployer"
+			},
+			"artifact_info": {
+				"major": "1",
+				"minor": "1",
+				"jar_prefix": "mlp-productmgmt-api"
+			},
+			"tokens": {
+				"dbId":"mlp-dev-db-creds",
+				"H2_DEFAULT_DATASORUCE":"H2",
+				"DB2_DEFAULT_DATASORUCE":"DefaultDataSource",
+				"DB_DIALECT":"spring.jpa.hibernate.dialect=org.hibernate.dialect.DB2Dialect",
+	        	"DDL_AUTO":"",
+				"DB_JNDI":"jdbc/db2",
+				"DB_JNDI-NAME":"spring.datasource.jndi-name=jdbc/db2",
+	        	"H2_DIALECT":"",
+	        	"H2_USERNAME":"",
+	        	"H2_PASSWORD":"",
+	        	"H2_CONSOLE":"",
+	        	"H2_WEB_SETTINGS":"",
+	        	"H2_PLATFORM":"",
+	        	"H2_URL":"",
+	        	"ADD_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions",
+	        	"REMOVE_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions/remove",
+				"RETRIEVE_PERMISSION_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions/userPermissions?userId={userId}",
+				"GET_USER_URL":"https://j2-mlp-useraccessmgmt-api-master.lbg.eu-gb.mybluemix.net/mlp-useraccessmgmt-api/permissions",
+				"APP_LOG_DIR": "./log",
+				"LOG_FILE_PREFIX": "MLP-ProductMgmt",
+				"ROOT_LOG_LEVEL": "INFO",
+				"APPLICATION_LOG_LEVEL": "DEBUG",
+				"CONSOLE_LOG_LEVEL": "DEBUG",
+				"FILE_LOG_LEVEL": "ON",
+				"LOG_IMMEDIATE_FLUSH": "true",
+				"MAX_SIZE_IN_MB_PER_LOG_FILE": "5",
+				"MAXIMUM_NUMBER_OF_ROLLED_FILES": "2",
+				"PERMISSION_SERVICE_REQUEST_TIMEOUT_IN_MILLISECONDS": "5000",
+				"PERMISSION_OPEN_CIRCUIT_TIMEOUT_IN_MILLISECONDS": "500",
+				"PERMISSION_MINIMUM_REQUEST_FOR_HEATH_CHECK": "5",
+				"PERMISSION_ERROR_THRESHOLD_PERCENTAGE": "50"
+	      	}
+		}
+	},
+	"passthresholds": {
+		"bdd": {
+			"percent_scenarios": "90"
+		}
+	},
+	"stash": {
+		"code_path": "mlp-productmgmt-api",
+		"bdd_code_path": "api-automation"
+	}
+}
