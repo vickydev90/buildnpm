@@ -8,7 +8,7 @@ def npmRun(Map configFile) {
 	new CommandExecutor().execute(preparedCommand)
 	
 	def NpmRun = NpmRun(configFile)
-	new CommandExecutor().execute(preparedCommand)
+	new CommandExecutor().execute(NpmRun)
 }
 
 def prepareCommand(Map configFile){
