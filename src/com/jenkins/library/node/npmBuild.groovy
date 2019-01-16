@@ -13,7 +13,7 @@ def npmRun(Map configFile) {
 
 def prepareCommand(Map configFile){
 	try{
-		// Default build goals are 'clean package'
+		// Default build goals are 'install'
 		def buildGoals = configFile.node.npm_goals ? configFile.node.npm_goals.toString() : "install"
 
 		println "Creating Command for execution ...."
