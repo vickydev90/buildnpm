@@ -15,10 +15,10 @@ def call() {
 
 def call(String runexe) {
 	
-
+	String configPath = "${env.WORKSPACE}/pipelines/conf/build-nodejs.yaml"
 	Map configFile = readYaml file: configPath
 	println "runexe: ${runexe}"
-	String configPath = config.configuration ? configFile.configuration : "${env.WORKSPACE}/pipelines/conf/build-nodejs.yaml"
+	//String configPath = config.configuration ? configFile.configuration : "${env.WORKSPACE}/pipelines/conf/build-nodejs.yaml"
 	
     def builder = new npmBuild()
     
