@@ -1,14 +1,16 @@
 package com.jenkins.library.node
 import com.jenkins.library.execution.CommandExecutor
 import com.jenkins.library.envVar
+import com.jenkins.library.archive
 
 def npmRun(Map configFile, String runexe) {
 	println "Initialting build"
 
 	def preparedCommand = prepareCommand(configFile, runexe)
 	new CommandExecutor().execute(preparedCommand)
+	
 	if ( runexe == 'npm run' ) {
-			this.runfunction()
+			this.tarPackage()
 		}
 }
 
@@ -46,13 +48,7 @@ def env() {
     variables.VariablesName()
 }
 
-def runfunction() {
-	  writeFile file: '/tmp/package.sh', text: libraryResource('package.sh')
-	  def pack = "chmod +x /tmp/package.sh"
-	  sh(returnStdout: true, script: pack)
-	  sh """/tmp/package.sh ${artifact}"""
-	  dir('j2') {
-      stash name: "artifact-${context.application}-${targetEnv}", includes: artifact
-      archiveArtifacts 	artifacts: artifact, onlyIfSuccessful: true
-    }
-    }
+def tarPackage() {
+	def tar = new archive()
+	tar.runfunction()
+}
