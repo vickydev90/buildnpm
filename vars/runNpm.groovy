@@ -13,11 +13,12 @@ def call() {
     builder.npmRun(configFile)
 }
 
-def call(Map config) {
+def call(String runexe) {
 	String configPath = config.configuration ? configFile.configuration : "${env.WORKSPACE}/pipelines/conf/build-nodejs.yaml"
 
 	Map configFile = readYaml file: configPath
 
     def builder = new npmBuild()
-    builder.npmRun(configFile)
+    
+    builder.npmRun(configFile, runexe)
 }
