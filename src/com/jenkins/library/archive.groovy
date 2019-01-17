@@ -1,4 +1,4 @@
-package com.jenkins.library.node
+package com.jenkins.library
 import com.jenkins.library.execution.CommandExecutor
 
 def runfunction() {
