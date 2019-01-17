@@ -14,7 +14,7 @@ def tarfunc(Map configFile, String targetEnv) {
 	try {
     dir('j2') {
       deleteDir()
-      unstash "artifact-${context.application}-${targetEnv}"
+      unstash "artifact-${context.application}"
       artifact = sh(returnStdout: true, script: 'ls *.tar.gz | head -1').trim()
       withCredentials([
        usernameColonPassword(    credentialsId: credentialsID,

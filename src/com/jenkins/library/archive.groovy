@@ -17,7 +17,7 @@ def runfunction() {
 	  sh(returnStdout: true, script: pack)
 	  sh """/tmp/package.sh ${artifact}"""
 	  dir('j2') {
-      stash name: "artifact-${context.application}-${targetEnv}", includes: artifact
+      stash name: "artifact-${context.application}", includes: artifact
       archiveArtifacts 	artifacts: artifact, onlyIfSuccessful: true
     }
     }
