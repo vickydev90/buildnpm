@@ -10,12 +10,13 @@ def npmRun(Map configFile, String runexe) {
 
 def prepareCommand(Map configFile, String runexe){
 	try{
+		def buildGoals
 		// Default build goals are 'install'
 		if ( runexe == 'npm' ) {
-			def buildGoals = configFile.node.npm_goals ? configFile.node.npm_goals.toString() : "install"
+			buildGoals = configFile.node.npm_goals ? configFile.node.npm_goals.toString() : "install"
 		}
 		else if ( runexe == 'npm run' )  {
-		    def buildGoals = configFile.node.npmRun_goals ? configFile.node.npmRun_goals.toString() : "build"                              
+		    buildGoals = configFile.node.npmRun_goals ? configFile.node.npmRun_goals.toString() : "build"                              
 		                              }
 
 		println "Creating Command for execution ...."
