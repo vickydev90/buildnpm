@@ -3,6 +3,7 @@ package com.jenkins.library
 public def VariablesName() {
  
         def ENV = [:]
+        println "Setting Up Environment Variables"
         ENV.HTTP_PROXY='http://10.113.140.187:3128'
  		ENV.HTTP_PROXY='http://10.113.140.187:3128'
         ENV.HTTPS_PROXY='http://10.113.140.187:3128'

@@ -1,0 +1,27 @@
+{
+    "Jenkins": {
+      "Java": {
+        "Build": {
+          "Lib": [
+            {
+              "Description": "Ability to run build Node projects using NPM",
+              "Platform": "nix",
+              "Command": [
+                     runNpm("npm")
+	   	     runNpm("npm run")
+	   	     runNpmPackage( env.branch )
+			],
+	      "Version": "1.0",
+              "Config": "pipelines/conf/build-nodejs.yaml",
+              "Github Repo": "https://github.lbg.eu-gb.bluemix.net/jenkins-shared-library/build-nodejs_nix.git",
+              "Minimum SolutionVersion": "2.12",
+              "Dependencies": "Pipeline-utility-step",
+              "Library": "build-nodejs_nix@master",
+              "Tags": "Jenkins, SharedLib, Node, Build",
+              "Name": "build-nodejs_nix"
+            }
+          ]
+        }
+      }
+    }
+  }

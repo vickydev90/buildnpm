@@ -1,70 +1,34 @@
-library identifier: 'java-maven-build_nix@master',retriever: modernSCM([$class: 'GitSCMSource',
-	remote: 'https://github.lbg.eu-gb.bluemix.net/jenkins-shared-library/java-maven-build_nix.git',
-	credentialsId: 'jenkinsGHEPAT'])
+library identifier: 'build-nodejs_nix@master', retriever: modernSCM(
+  [$class: 'GitSCMSource',
+   remote: 'git@git@github.lbg.eu-gb.bluemix.net:jenkins-shared-library/build-nodejs_nix.git',
+   credentialsId: 'ghe-credentials'])
+   
 
-pipeline
-{
-    agent {
-        kubernetes {
-           label "shared-lib-${UUID.randomUUID().toString()}"
-           yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    jenkins: jenkins-pipeline
-spec:
-  containers:
-  - name: jnlp
-    image: registry-proxy.lbg.eu-gb.mybluemix.net/mm-mlp/jnlp-slave:3.23-1-alpine
-    ttyEnabled: true
-  - name: java-build-tools
-    image: registry-proxy.lbg.eu-gb.mybluemix.net/java-build-tools:latest
-    imagePullPolicy: Always
-    command:
-    - cat
-    tty: true
-"""
-        }
-    }
+pipeline {
+  agent any  
     stages {
-	stage ('Init') {
-		steps {
-            echo "finding git workflow here..."
-		}
-	}
-	    
-	stage ("Sonarqube") {
-		steps{
-			echo "Sonar scan here..."
-		}
-	}
-	    
-	stage ('Unit Test') {
-		steps{
-			echo "Running unit test here..."
-		}
-	}
+  	 stage('Checkout') {  
+	     steps {
+		checkout scm
+	     }
+         }
+     stage('init') {
+         steps {
+           script {
+         	 echo "Checking git workflow"
+             String gitWorkFlow = gitWorkFlowTypeByBranchRule()
+             echo "gitWorkFlow: ${gitWorkFlow}"
+             env.branch = gitWorkFlow  
+         	}
+         }
 
-	stage('Build') {
-		steps{
-			container('java-build-tools'){
-				runMavenBuild(configuration: "${WORKSPACE}/pipelines/conf/java-maven-build.yaml")
-			}
-		}
-	}
-
-	stage ('BDD') {
-		steps{
-			echo "Running BDD Test..."
-		}
-	}
-
-	stage ('Notify') {
-		steps{
-            echo "Email steps here..."
-		}
-	}
-
+      }
+     stage('build') {
+         steps {
+	    runNpm("npm")
+	    runNpm("npm run")
+	    runNpmPackage( env.branch ) 
+	     }
+	     } 	
+          }
     }
-}

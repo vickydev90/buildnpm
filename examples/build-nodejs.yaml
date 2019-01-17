@@ -1,0 +1,14 @@
+application: test123
+distribution:
+    dir: dist-release
+nexus:
+  url: http://localhost:8081/nexus/content/repositories/releases/com/lloydsbanking
+  credentials: nexusLocal
+environments:
+     targetEnv: qa
+     targetbranch: 
+prefix: /usr/local/bin
+node:
+   npm_goals: install --save-dev typescript
+   npmRun_goals: build
+packageVersion: 1.1
