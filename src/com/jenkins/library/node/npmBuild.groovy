@@ -1,5 +1,6 @@
 package com.jenkins.library.node
 import com.jenkins.library.execution.CommandExecutor
+import com.jenkins.library.envVar
 
 def npmRun(Map configFile, String runexe) {
 	println "Initialting build"
@@ -10,6 +11,7 @@ def npmRun(Map configFile, String runexe) {
 
 def prepareCommand(Map configFile, String runexe){
 	try{
+		this.env()
 		def buildGoals
 		// Default build goals are 'install'
 		if ( runexe == 'npm' ) {
@@ -17,7 +19,7 @@ def prepareCommand(Map configFile, String runexe){
 		}
 		else if ( runexe == 'npm run' )  {
 		    buildGoals = configFile.node.npmRun_goals ? configFile.node.npmRun_goals.toString() : "build"                              
-		                              }
+		}
 
 		println "Creating Command for execution ...."
 		def command = runexe
@@ -34,4 +36,9 @@ def prepareCommand(Map configFile, String runexe){
 		println "FAILURE: runNpm(): ${ex.message}"
 		throw ex
 	}
+}
+
+def env() {
+    def variables = new envVar()
+    variables.VariablesName()
 }
