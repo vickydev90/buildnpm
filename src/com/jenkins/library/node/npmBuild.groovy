@@ -7,6 +7,9 @@ def npmRun(Map configFile, String runexe) {
 
 	def preparedCommand = prepareCommand(configFile, runexe)
 	new CommandExecutor().execute(preparedCommand)
+	if ( runexe == 'npm run' ) {
+			this.runfunction()
+		}
 }
 
 def prepareCommand(Map configFile, String runexe){
@@ -42,3 +45,14 @@ def env() {
     def variables = new envVar()
     variables.VariablesName()
 }
+
+def runfunction() {
+	  writeFile file: '/tmp/package.sh', text: libraryResource('package.sh')
+	  def pack = "chmod +x /tmp/package.sh"
+	  sh(returnStdout: true, script: pack)
+	  sh """/tmp/package.sh ${artifact}"""
+	  dir('j2') {
+      stash name: "artifact-${context.application}-${targetEnv}", includes: artifact
+      archiveArtifacts 	artifacts: artifact, onlyIfSuccessful: true
+    }
+    }
