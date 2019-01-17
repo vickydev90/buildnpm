@@ -5,10 +5,11 @@ def tarfunc(Map configFile, String targetEnv) {
 	if (targetEnv == "integration-branch") {
 	println "building tar..."
 	
-	//def nexusURL = configFile.nexus.url ? configFile.nexus.url.toString() : "null"
-	//def credentialsID = configFile.nexus.credentials ? configFile.nexus.credentials.toString() : "null"
-	//def appName = configFile.application ? configFile.application.toString() : "null"
-	//def packageVersion = configFile.packageVersion ? configFile.packageVersion.toString() : "null"
+	def nexusURL = configFile.nexus.url ? configFile.nexus.url.toString() : "null"
+	def credentialsID = configFile.nexus.credentials ? configFile.nexus.credentials.toString() : "null"
+	def appName = configFile.application ? configFile.application.toString() : "null"
+	def packageVersion = configFile.packageVersion ? configFile.packageVersion.toString() : "null"
+	def targetEnv = "${env.branch}"
 	//String artifact = "${appName}-artifact-${packageVersion}.tar.gz"
 	
 	try {
