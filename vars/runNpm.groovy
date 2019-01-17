@@ -17,6 +17,7 @@ def call(String runexe) {
 	String configPath = config.configuration ? configFile.configuration : "${env.WORKSPACE}/pipelines/conf/build-nodejs.yaml"
 
 	Map configFile = readYaml file: configPath
+	println "runexe: ${runexe}"
 
     def builder = new npmBuild()
     
