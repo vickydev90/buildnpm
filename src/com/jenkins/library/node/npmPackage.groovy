@@ -9,7 +9,7 @@ def tarfunc(Map configFile, String targetEnv) {
 	def credentialsID = configFile.nexus.credentials ? configFile.nexus.credentials.toString() : "null"
 	def appName = configFile.application ? configFile.application.toString() : "null"
 	def packageVersion = configFile.packageVersion ? configFile.packageVersion.toString() : "null"
-	String artifact = ${appName}-${targetEnv}-artifact-${packageVersion}.tar.gz
+	String artifact = "${appName}-artifact-${packageVersion}.tar.gz"
 	
 	try {
     dir('j2') {
